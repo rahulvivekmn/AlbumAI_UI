@@ -1,0 +1,51 @@
+.detail-card { display: flex; flex-direction: column; gap: 6px; padding: 16px; }
+.detail-header { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 2px; }
+.help-icon { width: 36px; height: 36px; border-radius: 50%; border: 0; background: #4f46e5; color: white; font-weight: 700; cursor: pointer; }
+.selection-summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #374151; margin-top: 2px; }
+.help-panel { padding: 10px 12px; border-radius: 12px; background: #eef2ff; color: #3730a3; margin-top: 4px; }
+.preview-card { display: flex; flex-direction: column; gap: 10px; padding: 16px; }
+.preview-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 2px; }
+.preview-hint { color: #6b7280; font-size: 0.9rem; }
+.preview-image-shell { position: relative; width: 100%; display: inline-block; }
+.preview-image { width: 100%; max-height: 420px; object-fit: cover; border-radius: 16px; display: block; }
+.preview-ai-toggle { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(17, 24, 39, 0.9); color: white; cursor: pointer; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22); }
+.preview-chat-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: min(320px, calc(100% - 24px));
+  max-height: calc(100% - 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.2);
+  z-index: 10;
+}
+.preview-chat-messages { display: flex; flex-direction: column; gap: 6px; max-height: 160px; overflow-y: auto; }
+.preview-chat-bubble { max-width: 85%; padding: 8px 10px; border-radius: 12px; font-size: 0.92rem; line-height: 1.4; }
+.preview-chat-bubble.assistant { align-self: flex-start; background: rgba(255, 255, 255, 0.95); color: #111827; }
+.preview-chat-bubble.user { align-self: flex-end; background: rgba(79, 70, 229, 0.92); color: white; }
+.preview-chat-form { display: flex; gap: 8px; }
+.preview-chat-form input { flex: 1; padding: 8px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.9); }
+.preview-chat-send { padding: 8px 12px; border-radius: 999px; }
+.filmstrip-block { display: flex; flex-direction: column; gap: 8px; }
+.filmstrip-toolbar { display: flex; gap: 8px; flex-wrap: wrap; }
+.filmstrip-filter-btn { border: 1px solid #d1d5db; background: white; color: #374151; border-radius: 999px; padding: 7px 12px; cursor: pointer; }
+.filmstrip-filter-btn.active { background: #4f46e5; color: white; border-color: #4f46e5; }
+.filmstrip { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; }
+.filmstrip-item { display: flex; flex-direction: column; gap: 6px; border: 1px solid #e5e7eb; background: white; border-radius: 12px; padding: 8px; cursor: pointer; text-align: left; width: 96px; }
+.filmstrip-item.active { border-color: #4f46e5; box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.18); }
+.filmstrip-item img { width: 80px; height: 60px; object-fit: cover; border-radius: 8px; align-self: center; }
+.filmstrip-empty { color: #6b7280; padding: 8px 0; }
+.vote-actions { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; align-items: center; }
+.vote-btn { flex: 0 0 auto; width: 44px; height: 44px; border: 1px solid #d1d5db; background: white; border-radius: 50%; padding: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+.vote-btn-select { width: auto; min-width: 0; flex: 1 1 auto; padding: 8px 12px; border-radius: 999px; }
+.vote-btn.active-like { background: #dcfce7; border-color: #22c55e; color: #166534; }
+.vote-btn.active-dislike { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+.vote-btn.active-select { background: #e0e7ff; border-color: #4f46e5; color: #3730a3; }
