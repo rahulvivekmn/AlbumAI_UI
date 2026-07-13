@@ -4,6 +4,8 @@ import './ClientAlbumDetailPage.css';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { useParams } from 'react-router-dom';
 import type { Album, AgentMessage, User } from '../types';
+import SwipeImage, { GalleryImage } from '../components/SwipeImage';
+import SwipeGallery from '../components/SwipeImage';
 
 type ClientAlbumDetailPageProps = {
   album: Album;
@@ -147,44 +149,45 @@ export function ClientAlbumDetailPage({ album, activeUser, onLogout }: ClientAlb
           </div>
 
           {activePhoto && (
-            <div className="preview-card card" tabIndex={0} onKeyDown={handleKeyNavigation}>
-              <div className="preview-header">
-                <div>
-                  <p className="eyebrow">Selected image</p>
-                  <h3>{activePhoto.title}</h3>
-                </div>
-                <div className="preview-hint">Use ← and →, press space to like, or backspace to dislike</div>
-              </div>
-              <div className="preview-image-shell">
-                {showAgentChat && (
-                  <div className="preview-chat-panel">
-                    <div className="preview-chat-messages">
-                      {agentMessages.map((message) => (
-                        <div key={message.id} className={`preview-chat-bubble ${message.role}`}>
-                          {message.text}
-                        </div>
-                      ))}
-                    </div>
-                    <form className="preview-chat-form" onSubmit={handleAgentSubmit}>
-                      <input type="text" value={agentInput} onChange={(event) => setAgentInput(event.target.value)} placeholder="Ask for edits or feedback" />
-                      <button type="submit" className="preview-chat-send">Send</button>
-                    </form>
-                  </div>
-                )}
-                <img src={activePhoto.src} alt={activePhoto.alt} className="preview-image" />
-                {!showAgentChat && (
-                  <button type="button" className="preview-ai-toggle" onClick={() => setShowAgentChat((current) => !current)} aria-label="Open AI assistant">
-                    🤖
-                  </button>
-                )}
-              </div>
+            // <div className="preview-card card" tabIndex={0} onKeyDown={handleKeyNavigation}>
+            //   <div className="preview-header">
+            //     <div>
+            //       <p className="eyebrow">Selected image</p>
+            //       <h3>{activePhoto.title}</h3>
+            //     </div>
+            //     <div className="preview-hint">Use ← and →, press space to like, or backspace to dislike</div>
+            //   </div>
+            //   <div className="preview-image-shell">
+            //     {showAgentChat && (
+            //       <div className="preview-chat-panel">
+            //         <div className="preview-chat-messages">
+            //           {agentMessages.map((message) => (
+            //             <div key={message.id} className={`preview-chat-bubble ${message.role}`}>
+            //               {message.text}
+            //             </div>
+            //           ))}
+            //         </div>
+            //         <form className="preview-chat-form" onSubmit={handleAgentSubmit}>
+            //           <input type="text" value={agentInput} onChange={(event) => setAgentInput(event.target.value)} placeholder="Ask for edits or feedback" />
+            //           <button type="submit" className="preview-chat-send">Send</button>
+            //         </form>
+            //       </div>
+            //     )}
+            //     <img src={activePhoto.src} alt={activePhoto.alt} className="preview-image" />
+            //     {!showAgentChat && (
+            //       <button type="button" className="preview-ai-toggle" onClick={() => setShowAgentChat((current) => !current)} aria-label="Open AI assistant">
+            //         🤖
+            //       </button>
+            //     )}
+            //   </div>
 
-              <div className="vote-actions">
-                <button type="button" className={`vote-btn ${likedPhotoIds.includes(activePhoto.id) ? 'active-like' : ''}`} onClick={() => handleLike(activePhoto.id)} aria-label="Like photo">👍</button>
-                <button type="button" className={`vote-btn ${dislikedPhotoIds.includes(activePhoto.id) ? 'active-dislike' : ''}`} onClick={() => handleDislike(activePhoto.id)} aria-label="Dislike photo">👎</button>
-                <button type="button" className={`vote-btn vote-btn-select ${selectedPhotoIds.includes(activePhoto.id) ? 'active-select' : ''}`} onClick={() => togglePhoto(activePhoto.id)}>{selectedPhotoIds.includes(activePhoto.id) ? '✓ Selected' : 'Select for edit'}</button>
-              </div>
-            </div>
+            //   <div className="vote-actions">
+            //     <button type="button" className={`vote-btn ${likedPhotoIds.includes(activePhoto.id) ? 'active-like' : ''}`} onClick={() => handleLike(activePhoto.id)} aria-label="Like photo">👍</button>
+            //     <button type="button" className={`vote-btn ${dislikedPhotoIds.includes(activePhoto.id) ? 'active-dislike' : ''}`} onClick={() => handleDislike(activePhoto.id)} aria-label="Dislike photo">👎</button>
+            //     <button type="button" className={`vote-btn vote-btn-select ${selectedPhotoIds.includes(activePhoto.id) ? 'active-select' : ''}`} onClick={() => togglePhoto(activePhoto.id)}>{selectedPhotoIds.includes(activePhoto.id) ? '✓ Selected' : 'Select for edit'}</button>
+            //   </div>
+            // </div>
+            <></>
           )}
 
           <div className="filmstrip-block">
@@ -210,6 +213,18 @@ export function ClientAlbumDetailPage({ album, activeUser, onLogout }: ClientAlb
               )}
             </div>
           </div>
+
+          <SwipeGallery
+            images={visiblePhotos.map((photo): GalleryImage => ({ id: photo.id, url: photo.src }))}
+            onSelect={(image) => {
+              console.log("Selected", image);
+              handleLike(image.id as number);
+            }}
+            onReject={(image) => { 
+              console.log("Rejected", image);
+              handleDislike(image.id as number);
+            }}
+          />
         </>
       </AppLayout>
     </ProtectedRoute>
